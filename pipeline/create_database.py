@@ -5,19 +5,19 @@ import pandas as pd
 conn = duckdb.connect("database/worldcup.duckdb")
 
 # Loading the CSVs
-matches = pd.read_csv("data/WorldCupMatches.csv")
-players = pd.read_csv("data/WorldCupPlayers.csv")
-worldcups = pd.read_csv("data/WorldCups.csv")
+matches = pd.read_csv("data/matches.csv")
+players = pd.read_csv("data/players.csv")
+teams = pd.read_csv("data/teams.csv")
 
 # Cleaning
 matches.columns = matches.columns.str.strip().str.lower().str.replace(" ", "_")
 players.columns = players.columns.str.strip().str.lower().str.replace(" ", "_")
-worldcups.columns = worldcups.columns.str.strip().str.lower().str.replace(" ", "_")
+teams.columns = teams.columns.str.strip().str.lower().str.replace(" ", "_")
 
 # Creating the tables
 conn.register("matches_df", matches)
 conn.register("players_df", players)
-conn.register("worldcups_df", worldcups)
+conn.register("teams_df", teams)
 
 conn.execute(
     """
@@ -35,8 +35,8 @@ conn.execute(
 
 conn.execute(
     """
-    create or replace table worldcups as
-    select * from worldcups_df
+    create or replace table teams as
+    select * from teams_df
     """
 )
 

@@ -8,15 +8,15 @@ conn = duckdb.connect("database/worldcup.duckdb")
 df = conn.execute(
     """
     select
-    team_initials,
-    player_name,
+    team,
+    player,
+    age,
+    goals,
+    assists
     from players
-    order by team_initials asc
+    order by player asc
     """
 ).fetchdf()
 
-team = st.sidebar.text_input("Enter a Team's Initials")
 
-filtered_df = df.query("team_initials == @team")
-
-st.dataframe(filtered_df)
+st.dataframe(df)
