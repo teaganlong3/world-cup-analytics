@@ -12,6 +12,7 @@ df = conn.execute(
     shots,
     goals,
     assists,
+    fouls,
     cards_yellow,
     cards_red
     from teams

@@ -1,4 +1,5 @@
 import duckdb
+import plotly.express as px
 import streamlit as st
 
 st.title("Player Analytics")
@@ -14,9 +15,8 @@ df = conn.execute(
     goals,
     assists
     from players
-    order by player asc
+    order by goals desc
     """
 ).fetchdf()
-
 
 st.dataframe(df)

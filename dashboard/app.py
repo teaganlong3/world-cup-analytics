@@ -1,34 +1,27 @@
 import streamlit as st
 
-home_page = st.Page(
-    page="views/homepage.py",
-    title="Fifa World Cup Analytics",
-    icon=":material/account_circle:",
-    default=True,
+st.set_page_config(
+    page_title="Fifa World Cup Analytics",
+    page_icon=":material/account_circle:",
+    layout="wide",
 )
 
-player_analytics = st.Page(
-    page="views/players.py",
-    title="Player Analytics",
-    icon=":material/bar_chart:",
-)
-
-team_analytics = st.Page(
-    page="views/teams.py",
-    title="Team Analytics",
-    icon=":material/bar_chart:",
-)
-
-prediction_model = st.Page(
-    page="views/predictions.py",
-    title="Game Predictions",
-    icon=":material/bar_chart:",
-)
+pages = {
+    "Dashboard": [
+        st.Page(
+            "views/homepage.py",
+            title="Home",
+            icon="📊",
+            default=True,
+        ),
+        st.Page("views/teams.py", title="Teams", icon="🌎"),
+        st.Page("views/players.py", title="Players", icon="🏃🏻‍♂️"),
+        st.Page("views/predictions.py", title="Predictions", icon="🤖"),
+    ]
+}
 
 # Navigation Setup
-pg = st.navigation(
-    pages=[home_page, team_analytics, player_analytics, prediction_model]
-)
+pg = st.navigation(pages, position="top")
 
 # Run Navigation
 pg.run()
