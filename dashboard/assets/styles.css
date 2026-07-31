@@ -1,0 +1,44 @@
+
+/* Metric Card Container */
+[data-testid="stMetric"] {
+    background-color: #f2f2f2;
+    border: 1px solid #d1d5db;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.88);
+    width: 100%;
+    text-align: center;
+}
+
+/* Metric Title */
+[data-testid="stMetricValue"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+    color: #374151 !important;
+    text-align: center !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Metric Value */
+[data-testid="stMetricLabel"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 2rem !important;
+    font-weight: bold !important;
+    color: #111827 !important;
+    text-align: center !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Remove Default Spacing */
+[data-testid="stMetricDelta"] {
+    justify-content: center;
+}
