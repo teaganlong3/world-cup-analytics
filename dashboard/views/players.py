@@ -1,21 +1,23 @@
 import duckdb
-import pandas as pd
-import plotly.express as px
 import streamlit as st
 from st_keyup import st_keyup
 
-st.title("Player Analytics")
 
-
+# Function to load local CSS file for page styling
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
+st.title("Player Analytics")
+
+# Load local CSS for styling
 local_css("dashboard/assets/styles.css")
 
+# Connect to the local database
 conn = duckdb.connect("database/worldcup.duckdb")
 
+# Fetching player data from the database and loading into a dataframe
 df = conn.execute(
     """
     select *
@@ -24,6 +26,9 @@ df = conn.execute(
     """
 ).fetchdf()
 
+# Continuous search functionality for players using st_keyup
+# The search input field allows users to type a player's name and dynamically filter the displayed results in real-time.
+# If a search is not provided, all players are displayed by default.
 search = st_keyup("Search players:", key="search_query")
 
 if search:
@@ -36,6 +41,7 @@ else:
     st.dataframe(df, hide_index=True)
 
 
+# In-depth player metrics section, allowing users to input a player's name and view detailed information
 metrics = st.text_input("Enter player name to view metrics:", key="metrics")
 
 if metrics:
@@ -44,6 +50,7 @@ if metrics:
     if not player_data.empty:
         bio_col, stat_col = st.columns([1, 2])
 
+        # Displaying player bio information in the first column
         with bio_col:
             st.subheader("Player Bio")
             st.markdown(f"Name: {player_data.iloc[0]['player']}")
@@ -53,6 +60,7 @@ if metrics:
             st.markdown(f"Age: {player_data.iloc[0]['age']}")
             st.markdown(f"Birth Year: {player_data.iloc[0]['birth_year']}")
 
+        # Displaying player stats in the second column
         with stat_col:
             st.subheader("Player Analytics")
             mcol1, mcol2 = st.columns(2)
