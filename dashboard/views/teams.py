@@ -7,7 +7,7 @@ st.title("Team Analytics")
 # Connect to the local database
 conn = duckdb.connect("database/worldcup.duckdb")
 
-# Fetching team and match data from the database and loading into dataframes
+# Fetching team data from the database and loading into a dataframe
 team_df = conn.execute(
     """
     select *
@@ -16,6 +16,7 @@ team_df = conn.execute(
     """
 ).fetchdf()
 
+# Fetching match data from the database and loading into a dataframe
 match_df = conn.execute(
     """
     select *
