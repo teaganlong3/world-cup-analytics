@@ -160,8 +160,6 @@ rf.fit(x_train, y_train)
 
 predictions = rf.predict(x_test)
 
-# print(classification_report(y_test, predictions))
-
 team1 = st.selectbox(
     "Home Team:", options=team_stats["team"].unique(), key="team1", index=0
 )
@@ -204,7 +202,5 @@ if team1 and team2:
     cols = st.columns(len(results))
 
     for col, (label, probability) in zip(cols, results):
-        # st.write(f"{labels[label]}: {probability:.2%}")
         with col:
             st.metric(label=labels[label], value=f"{probability:.2%}")
-        # st.markdown(f"""{labels[label]}: {probability:.2%}""")
